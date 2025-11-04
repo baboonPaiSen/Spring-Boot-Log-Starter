@@ -18,7 +18,7 @@
 ```xml
 <dependency>
     <groupId>cn.com.riven</groupId>
-    <artifactId>wind-spring-boot-starter-log</artifactId>
+    <artifactId>riven-spring-boot-starter-log</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
