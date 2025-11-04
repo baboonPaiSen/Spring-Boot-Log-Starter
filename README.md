@@ -1,4 +1,4 @@
-# Wind Spring Boot Log Starter
+# Spring Boot Log Starter
 
 一个用于Spring Boot应用的日志和异常处理starter，提供了统一的异常处理、日志记录和响应封装功能。
 
