@@ -5,12 +5,12 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.com.wind</groupId>
-    <artifactId>wind-spring-boot-starter-log</artifactId>
+    <groupId>cn.com.riven</groupId>
+    <artifactId>riven-spring-boot-starter-log</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Wind Log Spring Boot Starter</name>
+    <name>Log Spring Boot Starter</name>
     <description>Spring Boot Starter for logging and exception handling</description>
 
     <properties>
