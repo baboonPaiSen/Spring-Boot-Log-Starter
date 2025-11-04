@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="INFO" monitorInterval="30" packages="cn.com.wind.starter.log.handler">
+    <!-- 日志级别及优先级排序：OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+
+    <Properties>
+        <!--定义日志存储的路径-->
+        <property name="FILE_PATH" value="./log/"/>
+        <property name="FILE_NAME" value="SmartEditor"/>
+    </Properties>
+
+    <appenders>
+        <Rewrite name="rewrite">
+            <AppenderRef ref="Console"/>
+
+            <SensitiveRewritePolicy/>
+        </Rewrite>
+        <Console name="stdout" target="SYSTEM_OUT">
+<!--            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level %X{TRACE_ID} %X{TRACE_QUESTION} [%file:%L] - %msg%n"/>
+        </Console>
+
+
+        <RollingFile name="RollingFileInfo" fileName="${FILE_PATH}/${FILE_NAME}.log"
+                     filePattern="${FILE_PATH}/backup/info/${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <!-- 控制台对于 level以上的级别，接受(ACCEPT)，对于level以下的级别，拒绝(DENY) -->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- use built-in lookups for system info or system properties -->
+            <PatternLayout header="${java:runtime} - ${java:vm} - ${java:os}">
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level %X{TRACE_ID} %X{TRACE_QUESTION} [%C{36}.%M] - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- 当 fileName 对应的日志大小超过100M时，会以filePattern 重新存入，并重新清空 fileName对应的日志-->
+                <SizeBasedTriggeringPolicy size="100M"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="20">
+                <!-- 每次滚动保留的文件数，目前配置按小时滚动，那么同一个小时内最大日志数为20 -->
+                <Delete basePath="${FILE_PATH}/backup/info" maxDepth="100">
+                    <!-- 删除 basePath及其子文件夹下 文件名符合glob 且超过7天的日志-->
+                    <IfFileName glob="*/${FILE_NAME}.*.log.gz"/>
+                    <!-- 保留日志天数 D H M S 分别对应天 小时 分钟 秒 -->
+                    <IfLastModified age="7D"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError" fileName="${FILE_PATH}/${FILE_NAME}.error.log"
+                     filePattern="${FILE_PATH}/backup/error/${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd-HH}-%i.log.gz">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- use built-in lookups for system info or system properties -->
+            <PatternLayout header="${java:runtime} - ${java:vm} - ${java:os}">
+                <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level %X{TRACE_ID} %X{TRACE_QUESTION} [%C{36}.%M] - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100M"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="20">
+                <!-- 每次滚动保留的文件数，目前配置按小时滚动，那么同一个小时内最大日志数为20 -->
+                <Delete basePath="${FILE_PATH}/backup/error" maxDepth="100">
+                    <IfFileName glob="*/${FILE_NAME}.*.log.gz"/>
+                    <!-- 保留日志天数 D H M S 分别对应天 小时 分钟 秒 -->
+                    <IfLastModified age="7D"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <Root level="info">
+            <appender-ref ref="stdout"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileError"/>
+            <!--添加重写日志-->
+            <AppenderRef ref="rewrite" />
+        </Root>
+        <logger name="org.springframework" level="info"/>
+        <logger name="cn.com.wind.stock" level="debug"/>
+    </loggers>
+</configuration>

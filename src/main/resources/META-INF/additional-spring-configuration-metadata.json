@@ -1,0 +1,52 @@
+{
+  "properties": [
+    {
+      "name": "log.exception.defaultExceptionHandler.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用默认全局异常处理器.",
+      "defaultValue": false
+    },
+    {
+      "name": "log.exception.responseDataAdvice.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用统一响应数据封装.",
+      "defaultValue": false
+    },
+    {
+      "name": "log.methodLogAspect.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用方法日志切面.",
+      "defaultValue": false
+    },
+    {
+      "name": "log.httpRequestMDCFilter.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用HTTP请求MDC过滤器.",
+      "defaultValue": false
+    },
+    {
+      "name": "log.dispose.errorMsgShowMaxCount",
+      "type": "java.lang.Integer",
+      "description": "异常信息显示的最大行数.",
+      "defaultValue": 5
+    },
+    {
+      "name": "log.filter.globalSwitch",
+      "type": "java.lang.Boolean",
+      "description": "是否启用全局日志过滤开关.",
+      "defaultValue": false
+    },
+    {
+      "name": "log.eagle.globalSwitch",
+      "type": "java.lang.Boolean",
+      "description": "是否启用Eagle监控全局开关.",
+      "defaultValue": false
+    },
+    {
+      "name": "log.eagle.send",
+      "type": "java.lang.Boolean",
+      "description": "是否发送日志到Eagle监控系统.",
+      "defaultValue": false
+    }
+  ]
+}
