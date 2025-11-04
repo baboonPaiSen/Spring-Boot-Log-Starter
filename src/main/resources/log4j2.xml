@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="INFO" monitorInterval="30" packages="cn.com.wind.starter.log.handler">
+<configuration status="INFO" monitorInterval="30" packages="cn.com.riven.starter.log.handler">
     <!-- 日志级别及优先级排序：OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
 
     <Properties>
@@ -74,6 +74,6 @@
             <AppenderRef ref="rewrite" />
         </Root>
         <logger name="org.springframework" level="info"/>
-        <logger name="cn.com.wind.stock" level="debug"/>
+        <logger name="cn.com.riven.stock" level="debug"/>
     </loggers>
 </configuration>
